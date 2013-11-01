@@ -8,9 +8,39 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainScreen" >
 
-    <TextView
+    <Button
+        android:id="@+id/feed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Feed" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/feed"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="22dp"
+        android:text="Hunger" />
+
+    <Button
+        android:id="@+id/exercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/feed"
+        android:layout_alignBottom="@+id/feed"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="22dp"
+        android:text="Excercise" />
+
+    <sofia.graphics.ShapeView
+        android:id="@+id/shapeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView1"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/feed"/>
 
 </RelativeLayout>
