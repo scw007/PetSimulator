@@ -13,6 +13,7 @@ import android.view.Menu;
 public class MainScreen extends Screen{
 
     private Pet pet;
+    private Pet p;
 
     private ShapeView shapeView;
     private RectangleShape hungerBar;
