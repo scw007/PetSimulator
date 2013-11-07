@@ -13,6 +13,7 @@ import android.view.Menu;
 public class MainScreen extends Screen{
 
     private Pet pet;
+    private RectangleShape petImage;
 
     private ShapeView shapeView;
     private RectangleShape hungerBar;
@@ -32,6 +33,8 @@ public class MainScreen extends Screen{
     public void changeWasObserved(Pet pet)
     {
         hungerBar.setRightBottom(pet.getHunger(), 20);
+        petImage.setImage(pet.getAnimationString());
+
     }
 
     public void feedClicked()
