@@ -34,7 +34,6 @@ public class Pet
         animation = Animation.NEUTRAL;
         timer = Timer.callRepeatedly(this, "updateAnimation", 0, 5000);
 
-        notifyObservers();
     }
 
 

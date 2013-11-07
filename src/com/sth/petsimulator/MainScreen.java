@@ -18,11 +18,13 @@ public class MainScreen extends Screen{
     private ShapeView shapeView;
     private RectangleShape hungerBar;
 
-
+    // TODO: get rid of magic numbers
     public void initialize()
     {
         pet = new Pet();
         pet.addObserver(this); // update graphics based on changes here
+        petImage = new RectangleShape(0, shapeView.getHeight() - 20, shapeView.getWidth(), 20);
+        shapeView.add(petImage);
 
         hungerBar = new RectangleShape(0, shapeView.getHeight() - 20, pet.getHunger(), 20);
         hungerBar.setFillColor(Color.red);
