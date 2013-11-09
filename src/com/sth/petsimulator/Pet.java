@@ -55,7 +55,11 @@ public class Pet
      */
     public void feed()
     {
-        hunger--;
+        if (hunger > 0)
+        {
+            hunger--;
+        }
+
         weight++;
         happiness++;
         animation = Animation.EATING;
@@ -134,7 +138,7 @@ public class Pet
             case EATING:
                 return "eating";
             case PATTING:
-                    return "patting";
+                return "patting";
             case JUMPING:
                 return "jumping";
             default:
