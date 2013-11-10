@@ -19,6 +19,7 @@ public class MainScreen extends Screen{
     private RectangleShape petImage;
 
     private ShapeView shapeView;
+
     private RectangleShape hungerBar;
     private int hungerHeight;
 
@@ -36,7 +37,6 @@ public class MainScreen extends Screen{
         // Initially draw the hunger bar
         hungerHeight = shapeView.getHeight() / 24;
         hungerBar = new RectangleShape(0, shapeView.getHeight() - hungerHeight, shapeView.getX() + pet.getHunger(), hungerHeight);
-        //hungerBar = new RectangleShape(shapeView.getX(), shapeView.getY() + (shapeView.getHeight() / 2), shapeView.getX() + pet.getHunger(), shapeView.getHeight());
         hungerBar.setFillColor(Color.red);
         shapeView.add(hungerBar);
 
@@ -44,10 +44,14 @@ public class MainScreen extends Screen{
 
     public void changeWasObserved(Pet pet)
     {
+        int width = shapeView.getWidth();
+        int height = shapeView.getHeight();
+        int scale = pet.getWeight();
+
+
         // Stretch the pet proportional to the screen and place him in the center
-        petImage.setLeftTop(shapeView.getWidth() / 4, shapeView.getHeight() / 4);
-        petImage.setRightBottom(shapeView.getWidth() - (shapeView.getWidth() / 4), shapeView.getHeight() - (shapeView.getHeight() / 4));
-       // petImage.setPosition(petImage.getWidth() - (shapeView.getWidth() / 2), petImage.getHeight() - (shapeView.getHeight() / 2));
+        petImage.setLeftTop(width / 4 - scale, height / 4 - scale);
+        petImage.setRightBottom(width - (width / 4) + scale, height - (height / 4) + scale);
         petImage.setImage(pet.getAnimationString());
 
         hungerBar.setLeftTop(0, shapeView.getHeight() - (shapeView.getHeight() / 24));
