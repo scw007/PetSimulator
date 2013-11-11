@@ -1,6 +1,7 @@
 package com.sth.petsimulator;
 
 import sofia.util.Timer;
+import sofia.app.Persistent;
 
 public class Pet
     extends sofia.util.Observable
@@ -23,7 +24,6 @@ public class Pet
         RUNNING,
         PATTING
     }
-
 
     public Pet()
     {
