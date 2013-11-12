@@ -18,7 +18,7 @@ public class MainScreen
 {
 
     // The pet is saved between running the app
-    // @Persistent(create = true)
+    @Persistent(create = true)
     private Pet            pet;
 
     private RectangleShape petImage;
@@ -31,7 +31,7 @@ public class MainScreen
 
     public void initialize()
     {
-        pet = new Pet();
+        //pet = new Pet();
         pet.addObserver(this); // update graphics based on changes here
 
         int width = shapeView.getWidth();
