@@ -1,6 +1,8 @@
 package com.sth.petsimulator;
 
 import student.TestCase;
+import sofia.util.Timer;
+import sofia.app.Persistent;
 
 
 // -------------------------------------------------------------------------
@@ -21,12 +23,30 @@ public class PetTest extends TestCase
         pet = new Pet();
     }
 
-
+    /**
+     * Tests the Pat method.
+     */
     public void testPat()
     {
         assertEquals(50, pet.getHappiness());
         pet.pat();
         assertEquals(51, pet.getHappiness());
     }
+
+    /**
+     * Tests the Feed method.
+     */
+    public void testFeed()
+    {
+        assertEquals(50, pet.getHappiness());
+        assertEquals(50, pet.getWeight());
+        assertEquals(50, pet.getHunger());
+        pet.feed();
+        assertEquals(51, pet.getHappiness());
+        assertEquals(51, pet.getWeight());
+        assertEquals(49, pet.getHunger());
+    }
+
+
 
 }
