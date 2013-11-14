@@ -28,7 +28,10 @@ public class MainScreen
     private RectangleShape hungerBar;
     private int            hungerHeight;
 
-
+    /**
+     * Initializes all the characteristics of the pet.
+     *
+     */
     public void initialize()
     {
         pet = new Pet();
@@ -58,7 +61,9 @@ public class MainScreen
         pet.updateAnimation();
     }
 
-
+    /**
+     * Sets the Pet to the center of the screen.
+     */
     public void changeWasObserved(Pet pet)
     {
         int width = shapeView.getWidth();
@@ -78,31 +83,41 @@ public class MainScreen
 
     }
 
-
+    /**
+     * Notes if the feed button was clicked.
+     */
     public void feedClicked()
     {
         pet.feed();
     }
 
-
+    /**
+     * Notes if the exercise button was clicked.
+     */
     public void exerciseClicked()
     {
         pet.exercise();
     }
 
-
+    /**
+     * Touch on the screen is processed.
+     */
     public void onTouchDown(float x, float y)
     {
         processTouch(x, y);
     }
 
-
+    /**
+     * Touch on the screen changes the locaiton of the object
+     */
     public void onTouchMove(float x, float y)
     {
         processTouch(x, y);
     }
 
-
+    /**
+     * Ends the onTouchDown.
+     */
     public void onTouchUp(float x, float y)
     {
         // If you stop touching the pet, change its animation back
@@ -112,7 +127,9 @@ public class MainScreen
         }
     }
 
-
+    /**
+     * Records when you touch the pet.
+     */
     public void processTouch(float x, float y)
     {
         // If you are touching the pet

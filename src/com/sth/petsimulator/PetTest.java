@@ -21,6 +21,7 @@ public class PetTest extends TestCase
         pet = new Pet();
     }
 
+
     public void testPat()
     {
         assertEquals(50, pet.getHappiness());

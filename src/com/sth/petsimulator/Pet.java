@@ -25,6 +25,9 @@ public class Pet
         PATTING
     }
 
+    /**
+     * Constructor that initializes the pet's values.
+     */
     public Pet()
     {
         // TODO: setup initial values how we want them
@@ -81,7 +84,10 @@ public class Pet
         notifyObservers();
     }
 
-
+    /**
+     * Depending on the happiness level, the pet changes
+     * emotions.
+     */
     public void updateAnimation()
     {
         if (getHappiness() < 10)
@@ -104,25 +110,33 @@ public class Pet
         notifyObservers();
     }
 
-
+    /**
+     * Returns the hunger value
+     */
     public int getHunger()
     {
         return hunger;
     }
 
-
+    /**
+     * Returns the pets weight.
+     */
     public int getWeight()
     {
         return weight;
     }
 
-
+    /**
+     * Returns the happiness level.
+     */
     public int getHappiness()
     {
         return happiness;
     }
 
-
+    /**
+     * Returns the emotion in a string manner.
+     */
     public String getAnimationString()
     {
         switch (animation)
