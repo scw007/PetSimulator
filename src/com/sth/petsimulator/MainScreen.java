@@ -13,6 +13,15 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.Menu;
 
+/**
+ * The main class of the screen. Creates (or loads) the pet and everything
+ * necessary to draw on the screen.
+ *
+ * @author Steven Whitehead (scw007)
+ * @author Tianchen Peng (ptian94)
+ * @author Laxmi Harshitha Patha (laxmip5)
+ * @version (11.14.2013)
+ */
 public class MainScreen
     extends Screen
 {
@@ -28,13 +37,12 @@ public class MainScreen
     private RectangleShape hungerBar;
     private int            hungerHeight;
 
+
     /**
-     * Initializes all the characteristics of the pet.
-     *
+     * Initializes the pet and everything else that must be drawn on the screen.
      */
     public void initialize()
     {
-        //pet = new Pet();
         pet.addObserver(this); // update graphics based on changes here
 
         int width = shapeView.getWidth();
@@ -61,8 +69,13 @@ public class MainScreen
         pet.updateAnimation();
     }
 
+
     /**
-     * Sets the Pet to the center of the screen.
+     * Called when one of the pet's fields are changed. Update the view
+     * appropriately
+     *
+     * @param pet
+     *            the pet object
      */
     public void changeWasObserved(Pet pet)
     {
@@ -77,11 +90,11 @@ public class MainScreen
             - (height / 4) + scale);
         petImage.setImage(pet.getAnimationString());
 
-        hungerBar.setLeftTop(0, height
-            - (height / 24));
+        hungerBar.setLeftTop(0, height - (height / 24));
         hungerBar.setRightBottom(pet.getHunger(), height);
 
     }
+
 
     /**
      * Notes if the feed button was clicked.
@@ -91,6 +104,7 @@ public class MainScreen
         pet.feed();
     }
 
+
     /**
      * Notes if the exercise button was clicked.
      */
@@ -99,24 +113,42 @@ public class MainScreen
         pet.exercise();
     }
 
+
     /**
      * Touch on the screen is processed.
+     *
+     * @param x
+     *            the x value
+     * @param y
+     *            the y value
      */
     public void onTouchDown(float x, float y)
     {
         processTouch(x, y);
     }
 
+
     /**
-     * Touch on the screen changes the locaiton of the object
+     * Touch on the screen changes the location of the object
+     *
+     * @param x
+     *            the x value
+     * @param y
+     *            the y value
      */
     public void onTouchMove(float x, float y)
     {
         processTouch(x, y);
     }
 
+
     /**
      * Ends the onTouchDown.
+     *
+     * @param x
+     *            the x value
+     * @param y
+     *            the y value
      */
     public void onTouchUp(float x, float y)
     {
@@ -127,8 +159,14 @@ public class MainScreen
         }
     }
 
+
     /**
      * Records when you touch the pet.
+     *
+     * @param x
+     *            the x value
+     * @param y
+     *            the y value
      */
     public void processTouch(float x, float y)
     {
@@ -138,7 +176,5 @@ public class MainScreen
             pet.pat();
         }
     }
-
-
 
 }
