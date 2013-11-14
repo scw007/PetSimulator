@@ -3,6 +3,15 @@ package com.sth.petsimulator;
 import sofia.util.Timer;
 import sofia.app.Persistent;
 
+/**
+ * The model for the pet. Controls his various attributes (hunger, weight,
+ * happiness) as well as which animation should be drawn at the time.
+ *
+ * @author Steven Whitehead (scw007)
+ * @author Tianchen Peng (ptian94)
+ * @author Laxmi Harshitha Patha (laxmip5)
+ * @version (11.14.2013)
+ */
 public class Pet
     extends sofia.util.Observable
 {
@@ -11,8 +20,6 @@ public class Pet
     private int       weight;
     private int       happiness;
     private Animation animation;
-
-
 
     private enum Animation
     {
@@ -87,7 +94,7 @@ public class Pet
 
     /**
      * Depending on the happiness level, the pet changes
-     * emotions.
+     * animation.
      */
     public void updateAnimation()
     {
@@ -113,6 +120,7 @@ public class Pet
 
     /**
      * Returns the hunger value
+     * @return his hunger level
      */
     public int getHunger()
     {
@@ -121,6 +129,7 @@ public class Pet
 
     /**
      * Returns the pets weight.
+     * @return his weight
      */
     public int getWeight()
     {
@@ -129,6 +138,7 @@ public class Pet
 
     /**
      * Returns the happiness level.
+     * @return his happiness
      */
     public int getHappiness()
     {
@@ -136,7 +146,8 @@ public class Pet
     }
 
     /**
-     * Returns the emotion in a string manner.
+     * Returns the animation as a string. This is necessary to load image files.
+     * @return the animation as a string
      */
     public String getAnimationString()
     {
