@@ -6,11 +6,12 @@ import sofia.app.Persistent;
 public class Pet
     extends sofia.util.Observable
 {
+    // All of these fields must be primitives so that the object is Persistent
     private int       hunger;
     private int       weight;
     private int       happiness;
     private Animation animation;
-    private Timer     timer;
+
 
 
     private enum Animation
@@ -35,7 +36,7 @@ public class Pet
         weight = 50;
         happiness = 50;
         animation = Animation.NEUTRAL;
-        timer = Timer.callRepeatedly(this, "updateAnimation", 0, 5000);
+        Timer.callRepeatedly(this, "updateAnimation", 0, 5000);
 
     }
 
