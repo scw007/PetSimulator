@@ -80,17 +80,27 @@ public class MainScreen
             currentTime = System.currentTimeMillis();
         }
 
-        Timer.callRepeatedly(this, "getDate", 0, 5000);
+        Timer.callRepeatedly(this, "checkDate", 0, 5000);
 
         Timer.callRepeatedly(pet, "updateAnimation", 0, 5000);
     }
 
-    public void getDate()
+    /**
+     * Check the current time compared to the one stored in the field.
+     * If a certain amount of time has passed, the pet will get hungry.
+     * If his hunger is less than 0, he will die.
+     * TODO: Do something significant when he dies
+     */
+    public void checkDate()
     {
         if (System.currentTimeMillis() - currentTime >= 300000)
         {
             pet.changeHunger(-2);
-            System.out.println(pet.getHunger());
+            if (pet.getHunger() <= 0)
+            {
+                pet = new Pet();
+            }
+
             currentTime = System.currentTimeMillis();
         }
 
