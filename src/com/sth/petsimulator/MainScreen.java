@@ -1,5 +1,8 @@
 package com.sth.petsimulator;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import sofia.util.Timer;
 import sofia.app.Persistent;
 import android.graphics.RectF;
 import sofia.graphics.Color;
@@ -37,6 +40,11 @@ public class MainScreen
     private RectangleShape hungerBar;
     private int            hungerHeight;
 
+    private SimpleDateFormat dateFormat;
+
+    @Persistent
+    private long currentTime;
+
 
     /**
      * Initializes the pet and everything else that must be drawn on the screen.
@@ -66,9 +74,27 @@ public class MainScreen
         hungerBar.setFillColor(Color.red);
         shapeView.add(hungerBar);
 
-        pet.updateAnimation();
+        // Initialize the time if it is not known
+        if (currentTime == 0)
+        {
+            currentTime = System.currentTimeMillis();
+        }
+
+        Timer.callRepeatedly(this, "getDate", 0, 5000);
+
+        Timer.callRepeatedly(pet, "updateAnimation", 0, 5000);
     }
 
+    public void getDate()
+    {
+        if (System.currentTimeMillis() - currentTime >= 300000)
+        {
+            pet.changeHunger(-2);
+            System.out.println(pet.getHunger());
+            currentTime = System.currentTimeMillis();
+        }
+
+    }
 
     /**
      * Called when one of the pet's fields are changed. Update the view

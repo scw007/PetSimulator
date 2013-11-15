@@ -43,7 +43,6 @@ public class Pet
         weight = 50;
         happiness = 50;
         animation = Animation.NEUTRAL;
-        Timer.callRepeatedly(this, "updateAnimation", 0, 5000);
 
     }
 
@@ -66,9 +65,9 @@ public class Pet
      */
     public void feed()
     {
-        if (hunger > 0)
+        if (hunger < 100)
         {
-            hunger--;
+            hunger++;
         }
 
         weight++;
@@ -116,6 +115,15 @@ public class Pet
         }
 
         notifyObservers();
+    }
+
+    /**
+     * Increase or decrease the hunger by a specified amount.
+     * @param hung the amount to increase or decrease the hunger
+     */
+    public void changeHunger(int hung)
+    {
+        hunger += hung;
     }
 
     /**

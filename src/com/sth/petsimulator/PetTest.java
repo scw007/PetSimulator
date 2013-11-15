@@ -11,8 +11,10 @@ import sofia.app.Persistent;
  *  Follow it with additional details about its purpose, what abstraction
  *  it represents, and how to use it.
  *
- *  @author pitibow
- *  @version Nov 8, 2013
+ * @author Steven Whitehead (scw007)
+ * @author Tianchen Peng (ptian94)
+ * @author Laxmi Harshitha Patha (laxmip5)
+ * @version (11.14.2013)
  */
 public class PetTest extends TestCase
 {
