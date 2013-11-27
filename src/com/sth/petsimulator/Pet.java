@@ -21,17 +21,11 @@ public class Pet
     private int       happiness;
     private Animation animation;
 
-    private enum Animation
-    {
-        SAD,
-        MAD,
-        NEUTRAL,
-        HAPPY,
-        JUMPING,
-        EATING,
-        RUNNING,
-        PATTING
-    }
+
+
+
+
+
 
     /**
      * Constructor that initializes the pet's values.
@@ -91,9 +85,9 @@ public class Pet
         notifyObservers();
     }
 
+
     /**
-     * Depending on the happiness level, the pet changes
-     * animation.
+     * Depending on the happiness level, the pet changes animation.
      */
     public void updateAnimation()
     {
@@ -117,17 +111,22 @@ public class Pet
         notifyObservers();
     }
 
+
     /**
      * Increase or decrease the hunger by a specified amount.
-     * @param hung the amount to increase or decrease the hunger
+     *
+     * @param hung
+     *            the amount to increase or decrease the hunger
      */
     public void changeHunger(int hung)
     {
         hunger += hung;
     }
 
+
     /**
      * Returns the hunger value
+     *
      * @return his hunger level
      */
     public int getHunger()
@@ -135,8 +134,10 @@ public class Pet
         return hunger;
     }
 
+
     /**
      * Returns the pets weight.
+     *
      * @return his weight
      */
     public int getWeight()
@@ -144,8 +145,10 @@ public class Pet
         return weight;
     }
 
+
     /**
      * Returns the happiness level.
+     *
      * @return his happiness
      */
     public int getHappiness()
@@ -153,31 +156,12 @@ public class Pet
         return happiness;
     }
 
-    /**
-     * Returns the animation as a string. This is necessary to load image files.
-     * @return the animation as a string
-     */
-    public String getAnimationString()
-    {
-        switch (animation)
-        {
-            case MAD:
-                return "mad";
-            case SAD:
-                return "sad";
-            case HAPPY:
-                return "happy";
-            case RUNNING:
-                return "running";
-            case EATING:
-                return "eating";
-            case PATTING:
-                return "patting";
-            case JUMPING:
-                return "jumping";
-            default:
-                return "neutral";
 
-        }
+    public Animation getAnimation()
+    {
+        return animation;
     }
+
+
+
 }

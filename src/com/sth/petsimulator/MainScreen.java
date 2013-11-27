@@ -31,19 +31,22 @@ public class MainScreen
 
     // The pet is saved between running the app
     @Persistent(create = true)
-    private Pet            pet;
+    private Pet              pet;
 
-    private RectangleShape petImage;
+    private RectangleShape   petImage;
+    private CircularLinkedList<String> sadAnimation, madAnimation,
+    neutralAnimation, jumpingAnimation, pattingAnimation, happyAnimation,
+    eatingAnimation, runningAnimation;
 
-    private ShapeView      shapeView;
+    private ShapeView        shapeView;
 
-    private RectangleShape hungerBar;
-    private int            hungerHeight;
+    private RectangleShape   hungerBar;
+    private int              hungerHeight;
 
     private SimpleDateFormat dateFormat;
 
     @Persistent
-    private long currentTime;
+    private long             currentTime;
 
 
     /**
@@ -53,6 +56,8 @@ public class MainScreen
     {
         pet.addObserver(this); // update graphics based on changes here
 
+        createAnimationList();
+
         int width = shapeView.getWidth();
         int height = shapeView.getHeight();
         int scale = pet.getWeight();
@@ -60,16 +65,12 @@ public class MainScreen
         petImage =
             new RectangleShape(width / 4 - scale, height / 4 - scale, width
                 - (width / 4) + scale, height - (height / 4) + scale);
-        petImage.setImage(pet.getAnimationString());
         shapeView.add(petImage);
 
         // Initially draw the hunger bar
         hungerHeight = height / 24;
         hungerBar =
-            new RectangleShape(
-                0,
-                height - hungerHeight,
-                pet.getHunger(),
+            new RectangleShape(0, height - hungerHeight, pet.getHunger(),
                 height);
         hungerBar.setFillColor(Color.red);
         shapeView.add(hungerBar);
@@ -85,17 +86,18 @@ public class MainScreen
         Timer.callRepeatedly(pet, "updateAnimation", 0, 5000);
     }
 
+
     /**
-     * Check the current time compared to the one stored in the field.
-     * If a certain amount of time has passed, the pet will get hungry.
-     * If his hunger is less than 0, he will die.
-     * TODO: Do something significant when he dies
+     * Check the current time compared to the one stored in the field. If a
+     * certain amount of time has passed, the pet will get hungry. If his hunger
+     * is less than 0, he will die. TODO: Do something significant when he dies
      */
     public void checkDate()
     {
-        if (System.currentTimeMillis() - currentTime >= 300000)
+        long timeDiff = System.currentTimeMillis() - currentTime;
+        if (timeDiff >= 300000)
         {
-            pet.changeHunger(-2);
+            pet.changeHunger((int)timeDiff);
             if (pet.getHunger() <= 0)
             {
                 pet = new Pet();
@@ -105,6 +107,7 @@ public class MainScreen
         }
 
     }
+
 
     /**
      * Called when one of the pet's fields are changed. Update the view
@@ -124,7 +127,9 @@ public class MainScreen
         petImage.setLeftTop(width / 4 - scale, height / 4 - scale);
         petImage.setRightBottom(width - (width / 4) + scale, height
             - (height / 4) + scale);
-        petImage.setImage(pet.getAnimationString());
+        String imageString = aniToString(pet.getAnimation());
+
+        petImage.setImage(imageString);
 
         hungerBar.setLeftTop(0, height - (height / 24));
         hungerBar.setRightBottom(pet.getHunger(), height);
@@ -189,7 +194,7 @@ public class MainScreen
     public void onTouchUp(float x, float y)
     {
         // If you stop touching the pet, change its animation back
-        if (pet.getAnimationString().equals("patting"))
+        if (pet.getAnimation().equals(Animation.PATTING))
         {
             pet.updateAnimation();
         }
@@ -213,4 +218,65 @@ public class MainScreen
         }
     }
 
+    /**
+     * Creates a circular list to store each individual frame of an animation.
+     */
+    private void createAnimationList()
+    {
+        sadAnimation = new CircularLinkedList<String>();
+        sadAnimation.add("sad");
+
+        madAnimation = new CircularLinkedList<String>();
+        madAnimation.add("mad");
+
+        neutralAnimation = new CircularLinkedList<String>();
+        neutralAnimation.add("neutral");
+
+        happyAnimation = new CircularLinkedList<String>();
+        happyAnimation.add("happy");
+
+        jumpingAnimation = new CircularLinkedList<String>();
+        jumpingAnimation.add("jumping");
+
+        eatingAnimation = new CircularLinkedList<String>();
+        eatingAnimation.add("eating");
+
+        runningAnimation = new CircularLinkedList<String>();
+        runningAnimation.add("running");
+
+        pattingAnimation = new CircularLinkedList<String>();
+        pattingAnimation.add("patting");
+
+    }
+
+    private String aniToString(Animation ani)
+    {
+        switch (ani)
+        {
+            case MAD:
+                madAnimation.next();
+                return madAnimation.getCurrent();
+            case SAD:
+                sadAnimation.next();
+                return sadAnimation.getCurrent();
+            case HAPPY:
+                happyAnimation.next();
+                return happyAnimation.getCurrent();
+            case RUNNING:
+                runningAnimation.next();
+                return runningAnimation.getCurrent();
+            case EATING:
+                eatingAnimation.next();
+                return eatingAnimation.getCurrent();
+            case PATTING:
+                pattingAnimation.next();
+                return pattingAnimation.getCurrent();
+            case JUMPING:
+                jumpingAnimation.next();
+                return jumpingAnimation.getCurrent();
+            default:
+                neutralAnimation.next();
+                return neutralAnimation.getCurrent();
+        }
+    }
 }
