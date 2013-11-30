@@ -61,17 +61,12 @@ public class MainScreen
         int width = shapeView.getWidth();
         int height = shapeView.getHeight();
         int scale = pet.getWeight();
-        // Initially Draw the Pet
-        petImage =
-            new RectangleShape(width / 4 - scale, height / 4 - scale, width
-                - (width / 4) + scale, height - (height / 4) + scale);
+
+        petImage = new RectangleShape();
         shapeView.add(petImage);
 
-        // Initially draw the hunger bar
         hungerHeight = height / 24;
-        hungerBar =
-            new RectangleShape(0, height - hungerHeight, pet.getHunger(),
-                height);
+        hungerBar = new RectangleShape();
         hungerBar.setFillColor(Color.red);
         shapeView.add(hungerBar);
 
@@ -83,7 +78,10 @@ public class MainScreen
 
         Timer.callRepeatedly(this, "checkDate", 0, 5000);
 
-        Timer.callRepeatedly(pet, "updateAnimation", 0, 5000);
+        // Reset the animation back to it's mood
+        Timer.callRepeatedly(pet, "updateAnimation", 50, 5000);
+
+        Timer.callRepeatedly(this, "animateFrames", 50, 50);
     }
 
 
@@ -122,14 +120,10 @@ public class MainScreen
         int height = shapeView.getHeight();
         int scale = pet.getWeight();
 
-        // Stretch the pet proportional to the screen and place him in the
-// center
+        // Stretch the pet proportional to the screen and place in the center
         petImage.setLeftTop(width / 4 - scale, height / 4 - scale);
         petImage.setRightBottom(width - (width / 4) + scale, height
             - (height / 4) + scale);
-        String imageString = aniToString(pet.getAnimation());
-
-        petImage.setImage(imageString);
 
         hungerBar.setLeftTop(0, height - (height / 24));
         hungerBar.setRightBottom(pet.getHunger(), height);
@@ -240,6 +234,7 @@ public class MainScreen
 
         eatingAnimation = new CircularLinkedList<String>();
         eatingAnimation.add("eating");
+        eatingAnimation.add("happy");
 
         runningAnimation = new CircularLinkedList<String>();
         runningAnimation.add("running");
@@ -254,29 +249,70 @@ public class MainScreen
         switch (ani)
         {
             case MAD:
-                madAnimation.next();
                 return madAnimation.getCurrent();
             case SAD:
-                sadAnimation.next();
                 return sadAnimation.getCurrent();
             case HAPPY:
-                happyAnimation.next();
                 return happyAnimation.getCurrent();
             case RUNNING:
-                runningAnimation.next();
                 return runningAnimation.getCurrent();
             case EATING:
-                eatingAnimation.next();
                 return eatingAnimation.getCurrent();
             case PATTING:
-                pattingAnimation.next();
                 return pattingAnimation.getCurrent();
             case JUMPING:
-                jumpingAnimation.next();
                 return jumpingAnimation.getCurrent();
             default:
-                neutralAnimation.next();
                 return neutralAnimation.getCurrent();
         }
     }
+
+    /**
+     * Goes through each individual frame of an animation.
+     */
+    public void animateFrames()
+    {
+        String str;
+        Animation ani = pet.getAnimation();
+        System.out.println(ani.toString());
+        switch (ani)
+        {
+            case MAD:
+                madAnimation.next();
+                str = madAnimation.getCurrent();
+                break;
+            case SAD:
+                sadAnimation.next();
+                str = sadAnimation.getCurrent();
+                break;
+            case HAPPY:
+                happyAnimation.next();
+                str = happyAnimation.getCurrent();
+                break;
+            case RUNNING:
+                runningAnimation.next();
+                str = runningAnimation.getCurrent();
+                break;
+            case EATING:
+                eatingAnimation.next();
+                str = eatingAnimation.getCurrent();
+                break;
+            case PATTING:
+                pattingAnimation.next();
+                System.out.println("dorito");
+                str = pattingAnimation.getCurrent();
+                break;
+            case JUMPING:
+                jumpingAnimation.next();
+                str = jumpingAnimation.getCurrent();
+                break;
+            default:
+                neutralAnimation.next();
+                str = neutralAnimation.getCurrent();
+                break;
+        }
+        System.out.println(str);
+        petImage.setImage(str);
+    }
+
 }

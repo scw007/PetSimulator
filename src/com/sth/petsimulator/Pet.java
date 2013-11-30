@@ -21,12 +21,6 @@ public class Pet
     private int       happiness;
     private Animation animation;
 
-
-
-
-
-
-
     /**
      * Constructor that initializes the pet's values.
      */
