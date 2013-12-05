@@ -26,9 +26,8 @@ import android.view.Menu;
  * @version (11.14.2013)
  */
 public class MainScreen
-    extends Screen
+    extends ShapeScreen
 {
-
     // The pet is saved between running the app
     @Persistent(create = true)
     private Pet              pet;
@@ -37,8 +36,6 @@ public class MainScreen
     private CircularLinkedList<String> sadAnimation, madAnimation,
     neutralAnimation, jumpingAnimation, pattingAnimation, happyAnimation,
     eatingAnimation, runningAnimation;
-
-    private ShapeView        shapeView;
 
     private RectangleShape   hungerBar;
     private int              hungerHeight;
@@ -58,17 +55,20 @@ public class MainScreen
 
         createAnimationList();
 
-        int width = shapeView.getWidth();
-        int height = shapeView.getHeight();
         int scale = pet.getWeight();
 
-        petImage = new RectangleShape();
-        shapeView.add(petImage);
+        // Background
+        RectangleShape bg = new RectangleShape(0, 0, getWidth(), getHeight());
+        bg.setImage("bg");
+        add(bg);
 
-        hungerHeight = height / 24;
+        petImage = new RectangleShape();
+        add(petImage);
+
+        hungerHeight = (int)getHeight() / 24;
         hungerBar = new RectangleShape();
         hungerBar.setFillColor(Color.red);
-        shapeView.add(hungerBar);
+        add(hungerBar);
 
         // Initialize the time if it is not known
         if (currentTime == 0)
@@ -116,9 +116,9 @@ public class MainScreen
      */
     public void changeWasObserved(Pet pet)
     {
-        int width = shapeView.getWidth();
-        int height = shapeView.getHeight();
-        int scale = pet.getWeight();
+        float width = getWidth();
+        float height = getHeight();
+        float scale = pet.getWeight();
 
         // Stretch the pet proportional to the screen and place in the center
         petImage.setLeftTop(width / 4 - scale, height / 4 - scale);
@@ -129,25 +129,6 @@ public class MainScreen
         hungerBar.setRightBottom(pet.getHunger(), height);
 
     }
-
-
-    /**
-     * Notes if the feed button was clicked.
-     */
-    public void feedClicked()
-    {
-        pet.feed();
-    }
-
-
-    /**
-     * Notes if the exercise button was clicked.
-     */
-    public void exerciseClicked()
-    {
-        pet.exercise();
-    }
-
 
     /**
      * Touch on the screen is processed.
@@ -205,10 +186,41 @@ public class MainScreen
      */
     public void processTouch(float x, float y)
     {
+        float width = getWidth();
+        float height = getHeight();
+        float widthDiv = getWidth() / 4;
+        float heightDiv = getHeight() / 8;
+        float appleBord = widthDiv;
+        float exerBord = 2 * widthDiv;
+        float mediBord = 3 * widthDiv;
+
         // If you are touching the pet
         if (petImage.contains(x, y))
         {
             pet.pat();
+        }
+        else if (y < heightDiv)
+        {
+            if (x < appleBord)
+            {
+                pet.feed();
+            }
+            else if (x < exerBord)
+            {
+                pet.exercise();
+            }
+            else if (x < mediBord)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (y > heightDiv * 7)
+        {
+
         }
     }
 

@@ -150,7 +150,10 @@ public class Pet
         return happiness;
     }
 
-
+    /**
+     * Get the current animation of the pet.
+     * @return the current animation.
+     */
     public Animation getAnimation()
     {
         return animation;
