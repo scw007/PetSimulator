@@ -42,7 +42,24 @@ extends student.AndroidTestCase<MainScreen>
     {
 
     }
+    
+    public void testFeedButton()
+    {
+        click(0,0); // clicks the feed button
+        assertEquals(this.getPet().getAnimation(), EATING);
+    }
 
+    public void testExerciseButton()
+    {
+        click(0,0); // clicks the feed button
+        assertEquals(this.getPet().getAnimation(), JUMPING);
+    }
+
+    public void testTouchPet()
+    {
+        click() // click the center of the screen
+        assertEquals(this.getPet().getAnimation(), PATTING);
+    }
 
 
 }
