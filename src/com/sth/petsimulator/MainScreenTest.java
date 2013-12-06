@@ -1,13 +1,12 @@
 package com.sth.petsimulator;
 
-import android.widget.Button;
-import android.widget.TextView;
-import sofia.graphics.ShapeView;
+import android.content.Intent;
+import student.TestCase;
 
 // -------------------------------------------------------------------------
 /**
- * Tests the GUI. Check that all the buttons, touch functions, and the infoLabel
- * work correctly.
+ * Tests the GUI. Check that touching in the various locations works
+ * correctly.
  *
  * @author (Steven Whitehead)
  * @version (2013.10.15)
@@ -16,7 +15,7 @@ public class MainScreenTest
 extends student.AndroidTestCase<MainScreen>
 {
     // ~ Fields ................................................................
-
+    private MainScreen screen;
 
     // ~ Constructors ..........................................................
 
@@ -40,25 +39,25 @@ extends student.AndroidTestCase<MainScreen>
      */
     public void setUp()
     {
-
+        screen = this.getScreen();
     }
-    
+
     public void testFeedButton()
     {
-        click(0,0); // clicks the feed button
-        assertEquals(this.getPet().getAnimation(), EATING);
+        click(screen.getShapeView(), 0,0); // clicks the feed button
+        assertEquals(screen.getPet().getAnimation(), Animation.EATING);
     }
 
     public void testExerciseButton()
     {
-        click(0,0); // clicks the feed button
-        assertEquals(this.getPet().getAnimation(), JUMPING);
+        click(screen.getShapeView(), 0,0); // clicks the feed button
+        assertEquals(screen.getPet().getAnimation(), Animation.JUMPING);
     }
 
     public void testTouchPet()
     {
-        click() // click the center of the screen
-        assertEquals(this.getPet().getAnimation(), PATTING);
+        click(screen.getShapeView(), 0,0); // click the center of the screen
+        assertEquals(screen.getPet().getAnimation(), Animation.PATTING);
     }
 
 

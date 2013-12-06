@@ -327,4 +327,10 @@ public class MainScreen
         petImage.setImage(str);
     }
 
+    public Pet getPet()
+    {
+        return pet;
+
+    }
+
 }

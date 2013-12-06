@@ -1,10 +1,6 @@
 package com.sth.petsimulator;
 
 import student.TestCase;
-import sofia.util.Timer;
-import sofia.app.Persistent;
-
-
 // -------------------------------------------------------------------------
 /**
  *  Write a one-sentence summary of your class here.
@@ -26,7 +22,7 @@ public class PetTest extends TestCase
     }
 
     /**
-     * Tests the Pat method.
+     * Tests the Pat method so that it raises happiness.
      */
     public void testPat()
     {
@@ -36,7 +32,7 @@ public class PetTest extends TestCase
     }
 
     /**
-     * Tests the Feed method.
+     * Tests the Feed method so that it increases the stats appropriately.
      */
     public void testFeed()
     {
@@ -46,9 +42,40 @@ public class PetTest extends TestCase
         pet.feed();
         assertEquals(51, pet.getHappiness());
         assertEquals(51, pet.getWeight());
-        assertEquals(49, pet.getHunger());
+        assertEquals(51, pet.getHunger());
     }
 
+    /**
+     * Tests the Exercise method so that it changes weight appropriately.
+     */
+    public void testExercise()
+    {
+        assertEquals(50, pet.getWeight());
+        pet.exercise();
+        assertEquals(49, pet.getWeight());
+    }
 
+    /**
+     * Test that update animation sets the correct animation.
+     */
+    public void testUpdateAnimation()
+    {
+        pet.changeHappiness(-45);
+        pet.updateAnimation();
+        assertEquals(pet.getAnimation(), Animation.MAD);
+
+        pet.changeHappiness(13);
+        pet.updateAnimation();
+        assertEquals(pet.getAnimation(), Animation.SAD);
+
+        pet.changeHappiness(20);
+        pet.updateAnimation();
+        assertEquals(pet.getAnimation(), Animation.NEUTRAL);
+
+        pet.changeHappiness(30);
+        pet.updateAnimation();
+        assertEquals(pet.getAnimation(), Animation.HAPPY);
+
+    }
 
 }

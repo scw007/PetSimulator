@@ -76,6 +76,7 @@ public class Pet
         happiness++;
         animation = Animation.RUNNING;
 
+
         notifyObservers();
     }
 
@@ -115,6 +116,17 @@ public class Pet
     public void changeHunger(int hung)
     {
         hunger += hung;
+    }
+
+    /**
+     * Increase or decrease the happiness by a specified amount.
+     *
+     * @param happ
+     *            the amount to increase or decrease the happiness
+     */
+    public void changeHappiness(int happ)
+    {
+        happiness += happ;
     }
 
 
